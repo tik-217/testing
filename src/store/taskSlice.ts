@@ -5,11 +5,13 @@ import { RootState } from "./configureStore";
 export interface taskListState {
   list: Task[];
   notification: string;
+  filteringTasks: boolean;
 }
 
 const initialState: taskListState = {
   list: [],
   notification: "",
+  filteringTasks: false,
 };
 
 export const taskListSlice = createSlice({
@@ -50,6 +52,9 @@ export const taskListSlice = createSlice({
     clearNotification: (state) => {
       state.notification = "";
     },
+    isFilteringTasks(state) {
+      state.filteringTasks = !state.filteringTasks;
+    },
   },
 });
 
@@ -59,11 +64,15 @@ export const {
   deleteTask,
   toggleTask,
   clearNotification,
+  isFilteringTasks,
 } = taskListSlice.actions;
 
 export default taskListSlice.reducer;
 
 export const tasksSelector = (state: RootState) => state.taskList.list;
+
+export const filteredTasksSelector = (state: RootState) =>
+  state.taskList.filteringTasks;
 
 export const fullCount = (state: RootState) => state.taskList.list.length;
 
@@ -74,4 +83,4 @@ export const uncompleteCount = (state: RootState) =>
   state.taskList.list.filter((x) => !x.done).length;
 
 export const getNotification = (state: RootState) =>
-  state.taskList.notification
+  state.taskList.notification;

@@ -9,6 +9,6 @@ module.exports = {
     moduleNameMapper: {
       '\\.(css|less|png)$': '<rootDir>/spec/__mocks__/styleMock.js',
       'src(.*)$': '<rootDir>/src$1'
-    }
+    },
   };
   
